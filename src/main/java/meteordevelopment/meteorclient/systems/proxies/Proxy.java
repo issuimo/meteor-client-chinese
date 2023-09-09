@@ -18,33 +18,33 @@ public class Proxy implements ISerializable<Proxy> {
     public final Settings settings = new Settings();
 
     private final SettingGroup sgGeneral = settings.getDefaultGroup();
-    private final SettingGroup sgOptional = settings.createGroup("Optional");
+    private final SettingGroup sgOptional = settings.createGroup("可选");
 
     public Setting<String> name = sgGeneral.add(new StringSetting.Builder()
-        .name("name")
-        .description("The name of the proxy.")
+        .name("名称")
+        .description("代理名称")
         .defaultValue("")
         .build()
     );
 
     public Setting<ProxyType> type = sgGeneral.add(new EnumSetting.Builder<ProxyType>()
-        .name("type")
-        .description("The type of proxy.")
+        .name("类型")
+        .description("代理类型")
         .defaultValue(ProxyType.Socks5)
         .build()
     );
 
     public Setting<String> address = sgGeneral.add(new StringSetting.Builder()
-        .name("address")
-        .description("The ip address of the proxy.")
+        .name("地址")
+        .description("代理服务器IP")
         .defaultValue("")
         .filter(Utils::ipFilter)
         .build()
     );
 
     public Setting<Integer> port = sgGeneral.add(new IntSetting.Builder()
-        .name("port")
-        .description("The port of the proxy.")
+        .name("端口")
+        .description("代理服务器端口")
         .defaultValue(0)
         .range(0, 65535)
         .sliderMax(65535)
@@ -53,8 +53,8 @@ public class Proxy implements ISerializable<Proxy> {
     );
 
     public Setting<Boolean> enabled = sgGeneral.add(new BoolSetting.Builder()
-        .name("enabled")
-        .description("Whether the proxy is enabled.")
+        .name("启用")
+        .description("是否启用代理")
         .defaultValue(true)
         .build()
     );
@@ -62,15 +62,15 @@ public class Proxy implements ISerializable<Proxy> {
     // Optional
 
     public Setting<String> username = sgOptional.add(new StringSetting.Builder()
-        .name("username")
-        .description("The username of the proxy.")
+        .name("用户名")
+        .description("代理用户名")
         .defaultValue("")
         .build()
     );
 
     public Setting<String> password = sgOptional.add(new StringSetting.Builder()
-        .name("password")
-        .description("The password of the proxy.")
+        .name("密码")
+        .description("代理密码")
         .defaultValue("")
         .visible(() -> type.get().equals(ProxyType.Socks5))
         .build()

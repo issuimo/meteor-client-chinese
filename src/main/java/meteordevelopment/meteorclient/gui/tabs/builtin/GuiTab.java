@@ -20,7 +20,7 @@ import static meteordevelopment.meteorclient.MeteorClient.mc;
 
 public class GuiTab extends Tab {
     public GuiTab() {
-        super("GUI");
+        super("界面");
     }
 
     @Override
@@ -44,7 +44,7 @@ public class GuiTab extends Tab {
         public void initWidgets() {
             WTable table = add(theme.table()).expandX().widget();
 
-            table.add(theme.label("Theme:"));
+            table.add(theme.label("主题:"));
             WDropdown<String> themeW = table.add(theme.dropdown(GuiThemes.getNames(), GuiThemes.get().name)).widget();
             themeW.action = () -> {
                 GuiThemes.select(themeW.get());
@@ -58,7 +58,7 @@ public class GuiTab extends Tab {
 
         @Override
         public boolean toClipboard() {
-            return NbtUtils.toClipboard(theme.name + " GUI Theme", theme.toTag());
+            return NbtUtils.toClipboard(theme.name + " 界面主题", theme.toTag());
         }
 
         @Override

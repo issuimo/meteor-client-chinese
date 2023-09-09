@@ -74,7 +74,7 @@ public class Modules extends System<Modules> {
     private Module moduleToBind;
 
     public Modules() {
-        super("modules");
+        super("功能");
     }
 
     public static Modules get() {

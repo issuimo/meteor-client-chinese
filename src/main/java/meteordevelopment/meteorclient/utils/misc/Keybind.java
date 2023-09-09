@@ -83,7 +83,7 @@ public class Keybind implements ISerializable<Keybind>, ICopyable<Keybind> {
 
     @Override
     public String toString() {
-        if (value == -1) return "None";
+        if (value == -1) return "无";
         return isKey ? Utils.getKeyName(value) : Utils.getButtonName(value);
     }
 

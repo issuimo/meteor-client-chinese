@@ -41,8 +41,8 @@ public class ModulesScreen extends TabScreen {
 
         // Help
         WVerticalList help = add(theme.verticalList()).pad(4).bottom().widget();
-        help.add(theme.label("Left click - Toggle module"));
-        help.add(theme.label("Right click - Open module settings"));
+        help.add(theme.label("鼠标左键 - 打开/关闭 功能"));
+        help.add(theme.label("鼠标右键 - 打开功能设置"));
     }
 
     @Override
@@ -112,7 +112,7 @@ public class ModulesScreen extends TabScreen {
     }
 
     protected WWindow createSearch(WContainer c) {
-        WWindow w = theme.window("Search");
+        WWindow w = theme.window("搜索");
         w.id = "search";
 
         if (theme.categoryIcons()) {
@@ -145,7 +145,7 @@ public class ModulesScreen extends TabScreen {
         boolean hasFavorites = Modules.get().getAll().stream().anyMatch(module -> module.favorite);
         if (!hasFavorites) return null;
 
-        WWindow w = theme.window("Favorites");
+        WWindow w = theme.window("收藏");
         w.id = "favorites";
         w.padding = 0;
         w.spacing = 0;

@@ -28,7 +28,7 @@ import java.util.*;
 import static meteordevelopment.meteorclient.MeteorClient.mc;
 
 public class Hud extends System<Hud> implements Iterable<HudElement> {
-    public static final HudGroup GROUP = new HudGroup("Meteor");
+    public static final HudGroup GROUP = new HudGroup("界面");
 
     public boolean active;
     public Settings settings = new Settings();
@@ -37,15 +37,15 @@ public class Hud extends System<Hud> implements Iterable<HudElement> {
     private final List<HudElement> elements = new ArrayList<>();
 
     private final SettingGroup sgGeneral = settings.getDefaultGroup();
-    private final SettingGroup sgEditor = settings.createGroup("Editor");
-    private final SettingGroup sgKeybind = settings.createGroup("Bind");
+    private final SettingGroup sgEditor = settings.createGroup("编辑");
+    private final SettingGroup sgKeybind = settings.createGroup("绑定");
 
     // General
 
     private final Setting<Boolean> customFont = sgGeneral.add(new BoolSetting.Builder()
-        .name("custom-font")
-        .description("Text will use custom font.")
-        .defaultValue(true)
+        .name("自定义字体")
+        .description("文本使用自定义字体")
+        .defaultValue(false)
         .onChanged(aBoolean -> {
             for (HudElement element : elements) element.onFontChanged();
         })
@@ -53,15 +53,15 @@ public class Hud extends System<Hud> implements Iterable<HudElement> {
     );
 
     private final Setting<Boolean> hideInMenus = sgGeneral.add(new BoolSetting.Builder()
-        .name("hide-in-menus")
-        .description("Hides the meteor hud when in inventory screens or game menus.")
+        .name("隐藏界面")
+        .description("隐藏界面在打开背包或菜单时")
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Double> textScale = sgGeneral.add(new DoubleSetting.Builder()
-        .name("text-scale")
-        .description("Scale of text if not overridden by the element.")
+        .name("文本缩放")
+        .description("更改界面文本缩放比例")
         .defaultValue(1)
         .min(0.5)
         .sliderRange(0.5, 3)
@@ -69,8 +69,8 @@ public class Hud extends System<Hud> implements Iterable<HudElement> {
     );
 
     public final Setting<List<SettingColor>> textColors = sgGeneral.add(new ColorListSetting.Builder()
-        .name("text-colors")
-        .description("Colors used for the Text element.")
+        .name("文本颜色")
+        .description("改变文本的颜色")
         .defaultValue(List.of(new SettingColor(), new SettingColor(175, 175, 175), new SettingColor(25, 225, 25), new SettingColor(225, 25, 25)))
         .build()
     );
@@ -78,16 +78,16 @@ public class Hud extends System<Hud> implements Iterable<HudElement> {
     // Editor
 
     public final Setting<Integer> border = sgEditor.add(new IntSetting.Builder()
-        .name("border")
-        .description("Space around the edges of the screen.")
+        .name("边框")
+        .description("屏幕边缘的距离")
         .defaultValue(4)
         .sliderMax(20)
         .build()
     );
 
     public final Setting<Integer> snappingRange = sgEditor.add(new IntSetting.Builder()
-        .name("snapping-range")
-        .description("Snapping range in editor.")
+        .name("捕捉范围")
+        .description("在编辑器中捕捉范围")
         .defaultValue(10)
         .sliderMax(20)
         .build()
@@ -95,7 +95,7 @@ public class Hud extends System<Hud> implements Iterable<HudElement> {
 
     // Keybindings
     private final Setting<Keybind> keybind = sgKeybind.add(new KeybindSetting.Builder()
-        .name("bind")
+        .name("绑定")
         .defaultValue(Keybind.none())
         .action(() -> active = !active)
         .build()
@@ -104,7 +104,7 @@ public class Hud extends System<Hud> implements Iterable<HudElement> {
     private boolean resetToDefaultElements;
 
     public Hud() {
-        super("hud");
+        super("游戏界面");
     }
 
     public static Hud get() {

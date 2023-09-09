@@ -23,23 +23,23 @@ import java.util.List;
 import static meteordevelopment.meteorclient.MeteorClient.mc;
 
 public class HoleHud extends HudElement {
-    public static final HudElementInfo<HoleHud> INFO = new HudElementInfo<>(Hud.GROUP, "hole", "Displays information about the hole you are standing in.", HoleHud::new);
+    public static final HudElementInfo<HoleHud> INFO = new HudElementInfo<>(Hud.GROUP, "洞穴", "显示你所站的洞穴信息", HoleHud::new);
 
     private final SettingGroup sgGeneral = settings.getDefaultGroup();
-    private final SettingGroup sgBackground = settings.createGroup("Background");
+    private final SettingGroup sgBackground = settings.createGroup("背景");
 
     // General
 
     public final Setting<List<Block>> safe = sgGeneral.add(new BlockListSetting.Builder()
-        .name("safe-blocks")
-        .description("Which blocks to consider safe.")
+        .name("安全方块")
+        .description("那些方块是安全的")
         .defaultValue(Blocks.OBSIDIAN, Blocks.BEDROCK, Blocks.CRYING_OBSIDIAN, Blocks.NETHERITE_BLOCK)
         .build()
     );
 
     private final Setting<Double> scale = sgGeneral.add(new DoubleSetting.Builder()
-        .name("scale")
-        .description("The scale.")
+        .name("缩放")
+        .description("缩放比例")
         .defaultValue(2)
         .onChanged(aDouble -> calculateSize())
         .min(1)
@@ -48,8 +48,8 @@ public class HoleHud extends HudElement {
     );
 
     private final Setting<Integer> border = sgGeneral.add(new IntSetting.Builder()
-        .name("border")
-        .description("How much space to add around the element.")
+        .name("边框")
+        .description("在控件周围添加空白边框")
         .defaultValue(0)
         .onChanged(integer -> calculateSize())
         .build()
@@ -58,15 +58,15 @@ public class HoleHud extends HudElement {
     // Background
 
     private final Setting<Boolean> background = sgBackground.add(new BoolSetting.Builder()
-        .name("background")
-        .description("Displays background.")
+        .name("背景")
+        .description("显示背景")
         .defaultValue(false)
         .build()
     );
 
     private final Setting<SettingColor> backgroundColor = sgBackground.add(new ColorSetting.Builder()
-        .name("background-color")
-        .description("Color used for the background.")
+        .name("背景颜色")
+        .description("背景使用颜色")
         .visible(background::get)
         .defaultValue(new SettingColor(25, 25, 25, 50))
         .build()

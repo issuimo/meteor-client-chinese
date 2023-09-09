@@ -92,6 +92,7 @@ public class TitleScreenCredits {
 
             y += mc.textRenderer.fontHeight + 2;
         }
+        context.drawTextWithShadow(mc.textRenderer, "Meteor Client 汉化翻译: 遂沫", 5, 5, GRAY);
     }
 
     public static boolean onClicked(double mouseX, double mouseY) {

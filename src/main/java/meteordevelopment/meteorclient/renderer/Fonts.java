@@ -20,11 +20,13 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 import static meteordevelopment.meteorclient.MeteorClient.mc;
 
 public class Fonts {
-    public static final String[] BUILTIN_FONTS = { "JetBrains Mono", "Comfortaa", "Tw Cen MT", "Pixelation" };
+    // 改动:添加中文字体
+    public static final String[] BUILTIN_FONTS = { "StarRail", "JetBrains Mono", "Comfortaa", "Tw Cen MT", "Pixelation" };
 
     public static String DEFAULT_FONT_FAMILY;
     public static FontFace DEFAULT_FONT;
@@ -48,8 +50,8 @@ public class Fonts {
 
         MeteorClient.LOG.info("Found {} font families.", FONT_FAMILIES.size());
 
-        DEFAULT_FONT_FAMILY = FontUtils.getBuiltinFontInfo(BUILTIN_FONTS[1]).family();
-        DEFAULT_FONT = getFamily(DEFAULT_FONT_FAMILY).get(FontInfo.Type.Regular);
+        DEFAULT_FONT_FAMILY = FontUtils.getBuiltinFontInfo(BUILTIN_FONTS[0]).family();
+        DEFAULT_FONT = Objects.requireNonNull(getFamily(DEFAULT_FONT_FAMILY)).get(FontInfo.Type.Regular);
 
         Config config = Config.get();
         load(config != null ? config.font.get() : DEFAULT_FONT);

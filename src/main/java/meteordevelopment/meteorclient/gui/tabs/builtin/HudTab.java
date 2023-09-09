@@ -24,7 +24,7 @@ import static meteordevelopment.meteorclient.MeteorClient.mc;
 
 public class HudTab extends Tab {
     public HudTab() {
-        super("HUD");
+        super("游戏界面");
     }
 
     @Override
@@ -53,18 +53,18 @@ public class HudTab extends Tab {
 
             add(theme.horizontalSeparator()).expandX();
 
-            WButton openEditor = add(theme.button("Edit")).expandX().widget();
+            WButton openEditor = add(theme.button("编辑")).expandX().widget();
             openEditor.action = () -> mc.setScreen(new HudEditorScreen(theme));
 
             WHorizontalList buttons = add(theme.horizontalList()).expandX().widget();
-            buttons.add(theme.button("Clear")).expandX().widget().action = hud::clear;
-            buttons.add(theme.button("Reset to default elements")).expandX().widget().action = hud::resetToDefaultElements;
+            buttons.add(theme.button("清除")).expandX().widget().action = hud::clear;
+            buttons.add(theme.button("重置")).expandX().widget().action = hud::resetToDefaultElements;
 
             add(theme.horizontalSeparator()).expandX();
 
             WHorizontalList bottom = add(theme.horizontalList()).expandX().widget();
 
-            bottom.add(theme.label("Active: "));
+            bottom.add(theme.label("启用: "));
             WCheckbox active = bottom.add(theme.checkbox(hud.active)).expandCellX().widget();
             active.action = () -> hud.active = active.checked;
 

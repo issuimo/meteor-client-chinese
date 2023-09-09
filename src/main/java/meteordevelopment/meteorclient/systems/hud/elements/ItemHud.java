@@ -18,30 +18,30 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 
 public class ItemHud extends HudElement {
-    public static final HudElementInfo<ItemHud> INFO = new HudElementInfo<>(Hud.GROUP, "item", "Displays the item count.", ItemHud::new);
+    public static final HudElementInfo<ItemHud> INFO = new HudElementInfo<>(Hud.GROUP, "物品", "显示物品数量", ItemHud::new);
 
     private final SettingGroup sgGeneral = settings.getDefaultGroup();
-    private final SettingGroup sgBackground = settings.createGroup("Background");
+    private final SettingGroup sgBackground = settings.createGroup("背景");
 
     // General
 
     private final Setting<Item> item = sgGeneral.add(new ItemSetting.Builder()
-        .name("item")
-        .description("Item to display")
+        .name("物品")
+        .description("显示物品")
         .defaultValue(Items.TOTEM_OF_UNDYING)
         .build()
     );
 
     private final Setting<NoneMode> noneMode = sgGeneral.add(new EnumSetting.Builder<NoneMode>()
-        .name("none-mode")
-        .description("How to render the item when you don't have the specified item in your inventory.")
-        .defaultValue(NoneMode.HideCount)
+        .name("没有模式")
+        .description("当你的库存中没有指定的物品时, 如何渲染物品")
+        .defaultValue(NoneMode.ShowCount)
         .build()
     );
 
     private final Setting<Double> scale = sgGeneral.add(new DoubleSetting.Builder()
-        .name("scale")
-        .description("Scale of the item.")
+        .name("缩放")
+        .description("缩放物品")
         .defaultValue(2)
         .onChanged(aDouble -> calculateSize())
         .min(1)
@@ -50,8 +50,8 @@ public class ItemHud extends HudElement {
     );
 
     private final Setting<Integer> border = sgGeneral.add(new IntSetting.Builder()
-        .name("border")
-        .description("How much space to add around the element.")
+        .name("边框")
+        .description("在控件周围添加空白边框")
         .defaultValue(0)
         .onChanged(integer -> calculateSize())
         .build()
@@ -60,15 +60,15 @@ public class ItemHud extends HudElement {
     // Background
 
     private final Setting<Boolean> background = sgBackground.add(new BoolSetting.Builder()
-        .name("background")
-        .description("Displays background.")
+        .name("背景")
+        .description("显示背景")
         .defaultValue(false)
         .build()
     );
 
     private final Setting<SettingColor> backgroundColor = sgBackground.add(new ColorSetting.Builder()
-        .name("background-color")
-        .description("Color used for the background.")
+        .name("背景颜色")
+        .description("背景颜色")
         .visible(background::get)
         .defaultValue(new SettingColor(25, 25, 25, 50))
         .build()
@@ -141,9 +141,9 @@ public class ItemHud extends HudElement {
         @Override
         public String toString() {
             return switch (this) {
-                case HideItem -> "Hide Item";
-                case HideCount -> "Hide Count";
-                case ShowCount -> "Show Count";
+                case HideItem -> "隐藏物品";
+                case HideCount -> "隐藏数量";
+                case ShowCount -> "显示数量";
             };
         }
     }

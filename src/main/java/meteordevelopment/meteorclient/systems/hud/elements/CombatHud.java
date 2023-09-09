@@ -47,13 +47,13 @@ public class CombatHud extends HudElement {
     private static final Color RED = new Color(255, 15, 15);
     private static final Color BLACK = new Color(0, 0, 0, 255);
 
-    public static final HudElementInfo<CombatHud> INFO = new HudElementInfo<>(Hud.GROUP, "combat", "Displays information about your combat target.", CombatHud::new);
+    public static final HudElementInfo<CombatHud> INFO = new HudElementInfo<>(Hud.GROUP, "战斗", "显示战斗相关信息在你的屏幕屏幕上", CombatHud::new);
 
     private final SettingGroup sgGeneral = settings.getDefaultGroup();
 
     private final Setting<Double> scale = sgGeneral.add(new DoubleSetting.Builder()
-        .name("scale")
-        .description("The scale.")
+        .name("缩放")
+        .description("缩放比例")
         .defaultValue(2)
         .min(1)
         .sliderRange(1, 5)
@@ -61,8 +61,8 @@ public class CombatHud extends HudElement {
     );
 
     private final Setting<Double> range = sgGeneral.add(new DoubleSetting.Builder()
-        .name("range")
-        .description("The range to target players.")
+        .name("范围")
+        .description("目标玩家范围")
         .defaultValue(100)
         .min(1)
         .sliderMax(200)
@@ -70,105 +70,105 @@ public class CombatHud extends HudElement {
     );
 
     private final Setting<Boolean> displayPing = sgGeneral.add(new BoolSetting.Builder()
-        .name("ping")
-        .description("Shows the player's ping.")
+        .name("延迟")
+        .description("显示玩家延迟")
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Boolean> displayDistance = sgGeneral.add(new BoolSetting.Builder()
-        .name("distance")
-        .description("Shows the distance between you and the player.")
+        .name("距离")
+        .description("显示玩家间的距离")
         .defaultValue(true)
         .build()
     );
 
     private final Setting<List<Enchantment>> displayedEnchantments = sgGeneral.add(new EnchantmentListSetting.Builder()
-        .name("displayed-enchantments")
-        .description("The enchantments that are shown on nametags.")
+        .name("附魔效果")
+        .description("更改附魔的效果")
         .defaultValue(getDefaultEnchantments())
         .build()
     );
 
     private final Setting<SettingColor> backgroundColor = sgGeneral.add(new ColorSetting.Builder()
-        .name("background-color")
-        .description("Color of background.")
+        .name("背景颜色")
+        .description("更改背景颜色")
         .defaultValue(new SettingColor(0, 0, 0, 64))
         .build()
     );
 
     private final Setting<SettingColor> enchantmentTextColor = sgGeneral.add(new ColorSetting.Builder()
-        .name("enchantment-color")
-        .description("Color of enchantment text.")
+        .name("附魔颜色")
+        .description("更改附魔颜色")
         .defaultValue(new SettingColor(255, 255, 255))
         .build()
     );
 
     private final Setting<SettingColor> pingColor1 = sgGeneral.add(new ColorSetting.Builder()
-        .name("ping-stage-1")
-        .description("Color of ping text when under 75.")
+        .name("延迟(<75)")
+        .description("小于75延迟颜色")
         .defaultValue(new SettingColor(15, 255, 15))
         .visible(displayPing::get)
         .build()
     );
 
     private final Setting<SettingColor> pingColor2 = sgGeneral.add(new ColorSetting.Builder()
-        .name("ping-stage-2")
-        .description("Color of ping text when between 75 and 200.")
+        .name("延迟(75 - 200)")
+        .description("在75到200之间颜色")
         .defaultValue(new SettingColor(255, 150, 15))
         .visible(displayPing::get)
         .build()
     );
 
     private final Setting<SettingColor> pingColor3 = sgGeneral.add(new ColorSetting.Builder()
-        .name("ping-stage-3")
-        .description("Color of ping text when over 200.")
+        .name("延迟(>200)")
+        .description("大于200延迟颜色")
         .defaultValue(new SettingColor(255, 15, 15))
         .visible(displayPing::get)
         .build()
     );
 
     private final Setting<SettingColor> distColor1 = sgGeneral.add(new ColorSetting.Builder()
-        .name("distance-stage-1")
-        .description("The color when a player is within 10 blocks of you.")
+        .name("距离(<10)")
+        .description("距离10格以内颜色")
         .defaultValue(new SettingColor(255, 15, 15))
         .visible(displayDistance::get)
         .build()
     );
 
     private final Setting<SettingColor> distColor2 = sgGeneral.add(new ColorSetting.Builder()
-        .name("distance-stage-2")
-        .description("The color when a player is within 50 blocks of you.")
+        .name("距离(10 - 50)")
+        .description("距离在10 - 50格以内颜色")
         .defaultValue(new SettingColor(255, 150, 15))
         .visible(displayDistance::get)
         .build()
     );
 
     private final Setting<SettingColor> distColor3 = sgGeneral.add(new ColorSetting.Builder()
-        .name("distance-stage-3")
-        .description("The color when a player is greater then 50 blocks away from you.")
+        .name("距离(>50)")
+        .description("大于50格距离颜色")
         .defaultValue(new SettingColor(15, 255, 15))
         .visible(displayDistance::get)
         .build()
     );
 
     private final Setting<SettingColor> healthColor1 = sgGeneral.add(new ColorSetting.Builder()
-        .name("health-stage-1")
-        .description("The color on the left of the health gradient.")
+        .name("生命(左边)")
+        .description("生命右边颜色")
         .defaultValue(new SettingColor(255, 15, 15))
         .build()
     );
 
     private final Setting<SettingColor> healthColor2 = sgGeneral.add(new ColorSetting.Builder()
-        .name("health-stage-2")
-        .description("The color in the middle of the health gradient.")
+        .name("生命(中间)")
+        .description("生命中间颜色")
         .defaultValue(new SettingColor(255, 150, 15))
         .build()
     );
 
     private final Setting<SettingColor> healthColor3 = sgGeneral.add(new ColorSetting.Builder()
-        .name("health-stage-3")
-        .description("The color on the right of the health gradient.")
+        .name("生命(右边)")
+        .description("生命右边颜色")
         .defaultValue(new SettingColor(15, 255, 15))
         .build()
     );
@@ -229,7 +229,7 @@ public class CombatHud extends HudElement {
 
             // Ping
             int ping = EntityUtils.getPing(playerEntity);
-            String pingText = ping + "ms";
+            String pingText = ping + "毫秒";
 
             Color pingColor;
             if (ping <= 75) pingColor = pingColor1.get();
@@ -239,7 +239,7 @@ public class CombatHud extends HudElement {
             // Distance
             double dist = 0;
             if (!isInEditor()) dist = Math.round(mc.player.distanceTo(playerEntity) * 100.0) / 100.0;
-            String distText = dist + "m";
+            String distText = dist + "米";
 
             Color distColor;
             if (dist <= 10) distColor = distColor1.get();
@@ -247,12 +247,12 @@ public class CombatHud extends HudElement {
             else distColor = distColor3.get();
 
             // Status Text
-            String friendText = "Unknown";
+            String friendText = "未知";
 
             Color friendColor = primaryColor;
 
             if (Friends.get().isFriend(playerEntity)) {
-                friendText = "Friend";
+                friendText = "好友";
                 friendColor = Config.get().friendColor.get();
             }
             else {

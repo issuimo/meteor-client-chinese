@@ -15,52 +15,52 @@ import meteordevelopment.meteorclient.utils.render.color.SettingColor;
 import meteordevelopment.meteorclient.utils.world.TickRate;
 
 public class LagNotifierHud extends HudElement {
-    public static final HudElementInfo<LagNotifierHud> INFO = new HudElementInfo<>(Hud.GROUP, "lag-notifier", "Displays if the server is lagging in ticks.", LagNotifierHud::new);
+    public static final HudElementInfo<LagNotifierHud> INFO = new HudElementInfo<>(Hud.GROUP, "延迟", "显示服务器延迟", LagNotifierHud::new);
 
     private final SettingGroup sgGeneral = settings.getDefaultGroup();
-    private final SettingGroup sgScale = settings.createGroup("Scale");
-    private final SettingGroup sgBackground = settings.createGroup("Background");
+    private final SettingGroup sgScale = settings.createGroup("缩放");
+    private final SettingGroup sgBackground = settings.createGroup("背景");
 
     // General
 
     private final Setting<Boolean> shadow = sgGeneral.add(new BoolSetting.Builder()
-        .name("shadow")
-        .description("Text shadow.")
+        .name("阴影")
+        .description("文本阴影")
         .defaultValue(true)
         .build()
     );
 
     private final Setting<SettingColor> textColor = sgGeneral.add(new ColorSetting.Builder()
-        .name("text-color")
-        .description("A.")
+        .name("文本颜色")
+        .description("文本颜色")
         .defaultValue(new SettingColor())
         .build()
     );
 
     private final Setting<SettingColor> color1 = sgGeneral.add(new ColorSetting.Builder()
-        .name("color-1")
-        .description("First color.")
+        .name("颜色-1")
+        .description("第一颜色")
         .defaultValue(new SettingColor(255, 255, 5))
         .build()
     );
 
     private final Setting<SettingColor> color2 = sgGeneral.add(new ColorSetting.Builder()
-        .name("color-2")
-        .description("Second color.")
+        .name("颜色-2")
+        .description("第二颜色")
         .defaultValue(new SettingColor(235, 158, 52))
         .build()
     );
 
     private final Setting<SettingColor> color3 = sgGeneral.add(new ColorSetting.Builder()
-        .name("color-3")
-        .description("Third color.")
+        .name("颜色-3")
+        .description("第三颜色")
         .defaultValue(new SettingColor(225, 45, 45))
         .build()
     );
 
     private final Setting<Integer> border = sgGeneral.add(new IntSetting.Builder()
-        .name("border")
-        .description("How much space to add around the element.")
+        .name("边框")
+        .description("在周围添加空白边框")
         .defaultValue(0)
         .build()
     );
@@ -68,15 +68,15 @@ public class LagNotifierHud extends HudElement {
     // Scale
 
     private final Setting<Boolean> customScale = sgScale.add(new BoolSetting.Builder()
-        .name("custom-scale")
-        .description("Applies custom text scale rather than the global one.")
+        .name("自定义缩放")
+        .description("使用自定义缩放而不是全局缩放")
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Double> scale = sgScale.add(new DoubleSetting.Builder()
-        .name("scale")
-        .description("Custom scale.")
+        .name("缩放")
+        .description("缩放比例")
         .visible(customScale::get)
         .defaultValue(1)
         .min(0.5)
@@ -87,15 +87,15 @@ public class LagNotifierHud extends HudElement {
     // Background
 
     private final Setting<Boolean> background = sgBackground.add(new BoolSetting.Builder()
-        .name("background")
-        .description("Displays background.")
+        .name("背景")
+        .description("显示背景")
         .defaultValue(false)
         .build()
     );
 
     private final Setting<SettingColor> backgroundColor = sgBackground.add(new ColorSetting.Builder()
-        .name("background-color")
-        .description("Color used for the background.")
+        .name("背景颜色")
+        .description("使用自定义背景")
         .visible(background::get)
         .defaultValue(new SettingColor(25, 25, 25, 50))
         .build()

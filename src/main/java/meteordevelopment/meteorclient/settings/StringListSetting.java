@@ -101,7 +101,7 @@ public class StringListSetting extends Setting<List<String>>{
             table.row();
         }
 
-        WButton add = table.add(theme.button("Add")).expandX().widget();
+        WButton add = table.add(theme.button("添加")).expandX().widget();
         add.action = () -> {
             strings.add("");
             setting.set(strings);

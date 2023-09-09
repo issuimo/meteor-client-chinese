@@ -33,7 +33,7 @@ public class AddHudElementScreen extends WindowScreen {
     private Object firstObject;
 
     public AddHudElementScreen(GuiTheme theme, int x, int y) {
-        super(theme, "Add Hud element");
+        super(theme, "添加游戏界面");
 
         this.x = x;
         this.y = y;

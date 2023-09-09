@@ -249,7 +249,7 @@ public class DefaultSettingsWidgetFactory extends SettingsWidgetFactory {
 
         WItem item = list.add(theme.item(setting.get().asItem().getDefaultStack())).widget();
 
-        WButton select = list.add(theme.button("Select")).widget();
+        WButton select = list.add(theme.button("选择")).widget();
         select.action = () -> {
             BlockSettingScreen screen = new BlockSettingScreen(theme, setting);
             screen.onClosed(() -> item.set(setting.get().asItem().getDefaultStack()));
@@ -279,7 +279,7 @@ public class DefaultSettingsWidgetFactory extends SettingsWidgetFactory {
 
         WItem item = list.add(theme.item(setting.get().asItem().getDefaultStack())).widget();
 
-        WButton select = list.add(theme.button("Select")).widget();
+        WButton select = list.add(theme.button("选择")).widget();
         select.action = () -> {
             ItemSettingScreen screen = new ItemSettingScreen(theme, setting);
             screen.onClosed(() -> item.set(setting.get().getDefaultStack()));
@@ -345,7 +345,7 @@ public class DefaultSettingsWidgetFactory extends SettingsWidgetFactory {
         WHorizontalList list = table.add(theme.horizontalList()).expandX().widget();
         WItemWithLabel item = list.add(theme.itemWithLabel(setting.get().potion, setting.get().potion.getName().getString())).widget();
 
-        WButton button = list.add(theme.button("Select")).expandCellX().widget();
+        WButton button = list.add(theme.button("选择")).expandCellX().widget();
         button.action = () -> {
             WidgetScreen screen = new PotionSettingScreen(theme, setting);
             screen.onClosed(() -> item.set(setting.get().potion));
@@ -360,7 +360,7 @@ public class DefaultSettingsWidgetFactory extends SettingsWidgetFactory {
         WHorizontalList list = table.add(theme.horizontalList()).expandX().widget();
         WLabel label = list.add(theme.label(setting.get().info.family())).widget();
 
-        WButton button = list.add(theme.button("Select")).expandCellX().widget();
+        WButton button = list.add(theme.button("选择")).expandCellX().widget();
         button.action = () -> {
             WidgetScreen screen = new FontFaceSettingScreen(theme, setting);
             screen.onClosed(() -> label.set(setting.get().info.family()));
@@ -469,7 +469,7 @@ public class DefaultSettingsWidgetFactory extends SettingsWidgetFactory {
             ((WHorizontalList) c2).spacing *= 2;
         }
 
-        WButton button = c2.add(theme.button("Select")).expandCellX().widget();
+        WButton button = c2.add(theme.button("选择")).expandCellX().widget();
         button.action = action;
 
         if (addCount) c2.add(new WSelectedCountLabel(setting).color(theme.textSecondaryColor()));
@@ -500,7 +500,7 @@ public class DefaultSettingsWidgetFactory extends SettingsWidgetFactory {
             int size = getSize(setting);
 
             if (size != lastSize) {
-                set("(" + size + " selected)");
+                set("(" + size + " 已选择)");
                 lastSize = size;
             }
 

@@ -22,7 +22,7 @@ import net.minecraft.client.gui.screen.Screen;
 
 public class FriendsTab extends Tab {
     public FriendsTab() {
-        super("Friends");
+        super("好友");
     }
 
     @Override

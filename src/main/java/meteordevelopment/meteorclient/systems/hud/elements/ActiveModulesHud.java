@@ -16,79 +16,79 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ActiveModulesHud extends HudElement {
-    public static final HudElementInfo<ActiveModulesHud> INFO = new HudElementInfo<>(Hud.GROUP, "active-modules", "Displays your active modules.", ActiveModulesHud::new);
+    public static final HudElementInfo<ActiveModulesHud> INFO = new HudElementInfo<>(Hud.GROUP, "功能", "显示启用的的功能", ActiveModulesHud::new);
 
     private static final Color WHITE = new Color();
 
     private final SettingGroup sgGeneral = settings.getDefaultGroup();
 
     private final Setting<List<Module>> hiddenModules = sgGeneral.add(new ModuleListSetting.Builder()
-        .name("hidden-modules")
-        .description("Which modules not to show in the list.")
+        .name("隐藏功能")
+        .description("哪些模块不显示在列表中")
         .build()
     );
 
     private final Setting<Sort> sort = sgGeneral.add(new EnumSetting.Builder<Sort>()
-        .name("sort")
-        .description("How to sort active modules.")
+        .name("排序")
+        .description("排序启用功能列表")
         .defaultValue(Sort.Biggest)
         .build()
     );
 
     private final Setting<Boolean> activeInfo = sgGeneral.add(new BoolSetting.Builder()
-        .name("additional-info")
-        .description("Shows additional info from the module next to the name in the active modules list.")
+        .name("附加信息")
+        .description("显示启用功能的额外信息 如: 参数")
         .defaultValue(true)
         .build()
     );
 
     private final Setting<SettingColor> moduleInfoColor = sgGeneral.add(new ColorSetting.Builder()
-        .name("module-info-color")
-        .description("Color of module info text.")
+        .name("信息颜色")
+        .description("功能信息文本颜色")
         .defaultValue(new SettingColor(175, 175, 175))
         .visible(activeInfo::get)
         .build()
     );
 
     private final Setting<ColorMode> colorMode = sgGeneral.add(new EnumSetting.Builder<ColorMode>()
-        .name("color-mode")
-        .description("What color to use for active modules.")
+        .name("颜色模式")
+        .description("启用的功能使用什么颜色")
         .defaultValue(ColorMode.Rainbow)
         .build()
     );
 
     private final Setting<SettingColor> flatColor = sgGeneral.add(new ColorSetting.Builder()
-        .name("flat-color")
-        .description("Color for flat color mode.")
+        .name("平面颜色")
+        .description("平面颜色模式")
         .defaultValue(new SettingColor(225, 25, 25))
         .visible(() -> colorMode.get() == ColorMode.Flat)
         .build()
     );
 
     private final Setting<Boolean> shadow = sgGeneral.add(new BoolSetting.Builder()
-        .name("shadow")
-        .description("Renders shadow behind text.")
+        .name("阴影")
+        .description("渲染文本阴影")
         .defaultValue(true)
         .build()
     );
 
     private final Setting<Alignment> alignment = sgGeneral.add(new EnumSetting.Builder<Alignment>()
-        .name("alignment")
-        .description("Horizontal alignment.")
-        .defaultValue(Alignment.Auto)
+        .name("对齐")
+        .description("水平对齐")
+        .defaultValue(Alignment.Right)
         .build()
     );
 
     private final Setting<Boolean> outlines = sgGeneral.add(new BoolSetting.Builder()
-        .name("outlines")
-        .description("Whether or not to render outlines")
+        .name("描边")
+        .description("描边文本")
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Integer> outlineWidth = sgGeneral.add(new IntSetting.Builder()
-        .name("outline-width")
-        .description("Outline width")
+        .name("描边大小")
+        .description("描边大小 单位: 像素px")
         .defaultValue(2)
         .min(1)
         .sliderMin(1)
@@ -97,15 +97,15 @@ public class ActiveModulesHud extends HudElement {
     );
 
     private final Setting<Boolean> customScale = sgGeneral.add(new BoolSetting.Builder()
-        .name("custom-scale")
-        .description("Applies custom text scale rather than the global one.")
+        .name("自定义缩放")
+        .description("应用缩放文本在列表上")
         .defaultValue(false)
         .build()
     );
 
     private final Setting<Double> scale = sgGeneral.add(new DoubleSetting.Builder()
-        .name("scale")
-        .description("Custom scale.")
+        .name("缩放")
+        .description("缩放大小")
         .visible(customScale::get)
         .defaultValue(1)
         .min(0.5)
@@ -114,8 +114,8 @@ public class ActiveModulesHud extends HudElement {
     );
 
     private final Setting<Double> rainbowSpeed = sgGeneral.add(new DoubleSetting.Builder()
-        .name("rainbow-speed")
-        .description("Rainbow speed of rainbow color mode.")
+        .name("渐变速度")
+        .description("彩色渐变下的渐变速度")
         .defaultValue(0.05)
         .sliderMin(0.01)
         .sliderMax(0.2)
@@ -125,8 +125,8 @@ public class ActiveModulesHud extends HudElement {
     );
 
     private final Setting<Double> rainbowSpread = sgGeneral.add(new DoubleSetting.Builder()
-        .name("rainbow-spread")
-        .description("Rainbow spread of rainbow color mode.")
+        .name("传播速度")
+        .description("彩色渐变下的每项传播的速度")
         .defaultValue(0.01)
         .sliderMin(0.001)
         .sliderMax(0.05)
@@ -136,7 +136,7 @@ public class ActiveModulesHud extends HudElement {
     );
 
     private final Setting<Double> rainbowSaturation = sgGeneral.add(new DoubleSetting.Builder()
-        .name("rainbow-saturation")
+        .name("饱和度")
         .defaultValue(1.0d)
         .sliderRange(0.0d, 1.0d)
         .visible(() -> colorMode.get() == ColorMode.Rainbow)
@@ -144,7 +144,7 @@ public class ActiveModulesHud extends HudElement {
     );
 
     private final Setting<Double> rainbowBrightness = sgGeneral.add(new DoubleSetting.Builder()
-        .name("rainbow-brightness")
+        .name("亮度")
         .defaultValue(1.0d)
         .sliderRange(0.0d, 1.0d)
         .visible(() -> colorMode.get() == ColorMode.Rainbow)

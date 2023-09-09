@@ -52,13 +52,13 @@ public class FontUtils {
         STBTTFontinfo fontInfo = STBTTFontinfo.create();
         if (!STBTruetype.stbtt_InitFont(fontInfo, buffer)) return null;
 
-        ByteBuffer nameBuffer = STBTruetype.stbtt_GetFontNameString(fontInfo, STBTruetype.STBTT_PLATFORM_ID_MICROSOFT, STBTruetype.STBTT_MS_EID_UNICODE_BMP, STBTruetype.STBTT_MS_LANG_ENGLISH, 1);
-        ByteBuffer typeBuffer = STBTruetype.stbtt_GetFontNameString(fontInfo, STBTruetype.STBTT_PLATFORM_ID_MICROSOFT, STBTruetype.STBTT_MS_EID_UNICODE_BMP, STBTruetype.STBTT_MS_LANG_ENGLISH, 2);
+        ByteBuffer nameBuffer = STBTruetype.stbtt_GetFontNameString(fontInfo, STBTruetype.STBTT_PLATFORM_ID_MICROSOFT, STBTruetype.STBTT_MS_EID_UNICODE_BMP, STBTruetype.STBTT_MS_LANG_CHINESE, 1);
+        ByteBuffer typeBuffer = STBTruetype.stbtt_GetFontNameString(fontInfo, STBTruetype.STBTT_PLATFORM_ID_MICROSOFT, STBTruetype.STBTT_MS_EID_UNICODE_BMP, STBTruetype.STBTT_MS_LANG_CHINESE, 2);
         if (typeBuffer == null || nameBuffer == null) return null;
 
         return new FontInfo(
-            StandardCharsets.UTF_16.decode(nameBuffer).toString(),
-            FontInfo.Type.fromString(StandardCharsets.UTF_16.decode(typeBuffer).toString())
+            StandardCharsets.US_ASCII.decode(nameBuffer).toString(),
+            FontInfo.Type.fromString(StandardCharsets.US_ASCII.decode(typeBuffer).toString())
         );
     }
 

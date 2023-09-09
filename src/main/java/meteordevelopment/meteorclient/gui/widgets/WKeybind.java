@@ -29,7 +29,7 @@ public class WKeybind extends WHorizontalList {
     public void init() {
         label = add(theme.label("")).widget();
 
-        WButton set = add(theme.button("Set")).widget();
+        WButton set = add(theme.button("设置")).widget();
         set.action = () -> {
             listening = true;
             label.set("...");

@@ -26,7 +26,7 @@ public class AddAlteningAccountScreen extends AddAccountScreen {
         t.row();
 
         // Add
-        add = t.add(theme.button("Add")).expandX().widget();
+        add = t.add(theme.button("添加")).expandX().widget();
         add.action = () -> {
             if (!token.get().isEmpty()) {
                 AccountsScreen.addAccount(this, parent, new TheAlteningAccount(token.get()));

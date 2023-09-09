@@ -28,7 +28,7 @@ import static meteordevelopment.meteorclient.MeteorClient.mc;
 
 public class ProfilesTab extends Tab {
     public ProfilesTab() {
-        super("Profiles");
+        super("配置文件");
     }
 
     @Override
@@ -54,7 +54,7 @@ public class ProfilesTab extends Tab {
             add(theme.horizontalSeparator()).expandX();
 
             // Create
-            WButton create = add(theme.button("Create")).expandX().widget();
+            WButton create = add(theme.button("创建")).expandX().widget();
             create.action = () -> mc.setScreen(new EditProfileScreen(theme, null, this::reload));
         }
 
@@ -65,10 +65,10 @@ public class ProfilesTab extends Tab {
             for (Profile profile : Profiles.get()) {
                 table.add(theme.label(profile.name.get())).expandCellX();
 
-                WButton save = table.add(theme.button("Save")).widget();
+                WButton save = table.add(theme.button("保存")).widget();
                 save.action = profile::save;
 
-                WButton load = table.add(theme.button("Load")).widget();
+                WButton load = table.add(theme.button("加载")).widget();
                 load.action = profile::load;
 
                 WButton edit = table.add(theme.button(GuiRenderer.EDIT)).widget();
@@ -102,7 +102,7 @@ public class ProfilesTab extends Tab {
         private final Runnable action;
 
         public EditProfileScreen(GuiTheme theme, Profile profile, Runnable action) {
-            super(theme, profile == null ? "New Profile" : "Edit Profile");
+            super(theme, profile == null ? "新建配置" : "编辑配置");
 
             this.isNew = profile == null;
             this.profile = isNew ? new Profile() : profile;
@@ -116,7 +116,7 @@ public class ProfilesTab extends Tab {
 
             add(theme.horizontalSeparator()).expandX();
 
-            WButton save = add(theme.button(isNew ? "Create" : "Save")).expandX().widget();
+            WButton save = add(theme.button(isNew ? "创建" : "保存")).expandX().widget();
             save.action = () -> {
                 if (profile.name.get().isEmpty()) return;
 
